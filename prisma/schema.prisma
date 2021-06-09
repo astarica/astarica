@@ -1,0 +1,44 @@
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+model Web {
+  username    String       @id
+  password    String
+  link        String
+  name        String
+  template    String?
+  invitations Invitation[]
+  comments    Comment[]
+}
+
+model Invitation {
+  id          Int      @id @default(autoincrement())
+  name        String
+  address     String
+  lastUpdate  DateTime
+  Web         Web?     @relation(fields: [webUsername], references: [username])
+  webUsername String?
+  status      Status   @default(NO_CONFIRMATION)
+}
+
+model Comment {
+  id          Int      @id @default(autoincrement())
+  name        String
+  text        String
+  createdAt   DateTime
+  Web         Web?     @relation(fields: [webUsername], references: [username])
+  webUsername String?
+}
+
+enum Status {
+  NO_CONFIRMATION
+  CONFIRMED
+  ABSENT
+  CONFUSED
+}
