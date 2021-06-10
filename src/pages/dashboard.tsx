@@ -1,3 +1,4 @@
+import { Comment } from "../components/Comment"
 import { Container } from "../components/Container"
 import { Hero } from "../components/Hero"
 import { Navbar } from "../components/Navbar"
@@ -11,6 +12,7 @@ const Dashboard = () => {
       <Hero />
       <Stat />
       <Template />
+      <Comment />
     </Container>
   )
 }
