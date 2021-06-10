@@ -4,7 +4,9 @@ import { Button } from "@chakra-ui/button"
 
 export const Template = () => (
   <VStack p={4} alignItems="flex-start" w="full">
-    <Heading size="sm">Setting Template Undangan</Heading>
+    <Heading w="full" size="sm">
+      Setting Template Undangan
+    </Heading>
     <Box borderLeftWidth={6} borderColor="teal" p={4} bgColor="white">
       <Box mb={3}>
         Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ab totam

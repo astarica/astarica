@@ -36,7 +36,7 @@ const Item = () => (
 
 export const Comment = () => (
   <VStack p={4} w="full" alignItems="flex-start">
-    <Heading size="small" textAlign="left">
+    <Heading w="full" size="small" textAlign="left">
       Ucapan Terbaru
     </Heading>
     <VStack w="full" alignItems="stretch" justifyContent="stretch">
