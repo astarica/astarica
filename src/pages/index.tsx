@@ -4,6 +4,7 @@ import { FormEventHandler, useEffect, useState } from "react"
 import { Button } from "@chakra-ui/button"
 import { Container } from "../components/Container"
 import { DefaultResponse } from "../types"
+import Head from "next/head"
 import { Input } from "@chakra-ui/input"
 import { fetcher } from "../services/fetcher"
 import { useRouter } from "next/dist/client/router"
@@ -53,6 +54,9 @@ const Index = () => {
       justifyContent="center"
       height="100vh"
     >
+      <Head>
+        <title>Astarica - Dasboard login</title>
+      </Head>
       <Heading>Astarica</Heading>
       <Box>Dashboard</Box>
       <VStack my={6} w="full" maxW="xs" spacing={3}>
