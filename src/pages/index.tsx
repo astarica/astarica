@@ -55,7 +55,7 @@ const Index = () => {
       height="100vh"
     >
       <Head>
-        <title>Astarica - Dasboard login</title>
+        <title>Astarica - Dashboard login</title>
       </Head>
       <Heading>Astarica</Heading>
       <Box>Dashboard</Box>
