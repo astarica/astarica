@@ -28,7 +28,7 @@ export class Auth {
   }
 
   sign(email: string) {
-    this.token = jwt.sign({ email }, this.secret)
+    this.token = jwt.sign({ email }, this.secret, { expiresIn: "7d" })
     return this.toBearer()
   }
 
@@ -41,7 +41,7 @@ export class Auth {
       where: { username: username.toLowerCase(), password },
     })
     if (user.length > 0) {
-      this.sign(username)
+      this.sign(username.toLowerCase())
       this.Cookies.set(this.CookieKey, this.toBearer(), { httpOnly: true })
       return true
     }
