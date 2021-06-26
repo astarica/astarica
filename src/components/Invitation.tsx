@@ -6,6 +6,7 @@ import { Button } from "@chakra-ui/button"
 import { Invitation as IInvitation } from "@prisma/client"
 import { MeCtx } from "./MeCtx"
 import { Select } from "@chakra-ui/select"
+import { statusMapping } from "../services/status"
 import { useContext } from "react"
 
 export const Invitation = () => {
@@ -76,7 +77,7 @@ const InvitationItem = ({ key, data }: { key?: string; data: IInvitation }) => (
         fontSize="sm"
         fontWeight="bold"
       >
-        {data.status}
+        {statusMapping(data.status).name}
       </Box>
       <HStack color="blackAlpha.700">
         <CopyIcon />
