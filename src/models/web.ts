@@ -54,3 +54,13 @@ export class Web {
     })
   }
 }
+
+export const DEFAULT_MSG_TEMPLATE = `
+Hello [name] at [address],
+I'm here to invite you on my marriage party.
+show my invitation link here:
+
+[link]
+
+Thanks
+`

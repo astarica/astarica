@@ -1,10 +1,13 @@
 import { Box, Divider, Flex, HStack } from "@chakra-ui/layout"
 
 import { Button } from "@chakra-ui/button"
+import { MeCtx } from "./MeCtx"
+import { useContext } from "react"
 import { useRouter } from "next/dist/client/router"
 
 export const Navbar = () => {
   const router = useRouter()
+  const { me } = useContext(MeCtx)
   return (
     <Flex
       justifyContent="flex-end"
@@ -15,7 +18,7 @@ export const Navbar = () => {
       mb={4}
     >
       <HStack>
-        <Box fontWeight="bold">Muhmmad Wafa</Box>
+        <Box fontWeight="bold">{me.name}</Box>
         <Divider variant="solid" orientation="vertical" />
         <Button
           size="sm"
