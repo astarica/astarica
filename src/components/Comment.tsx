@@ -19,7 +19,7 @@ const Item = ({ data }: { data: IComment }) => (
         w={["30px", "50px"]}
         h={["30px", "50px"]}
       >
-        M
+        {data.name.slice(0, 1)}
       </Flex>
     </Box>
     <Box w="full">
