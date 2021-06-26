@@ -2,6 +2,7 @@ import { Comment, Invitation } from "@prisma/client"
 import { ReactNode, createContext, useEffect, useState } from "react"
 
 import { fetchMe } from "../services/fetcher"
+import { useRouter } from "next/dist/client/router"
 
 export interface Me {
   username: string
@@ -25,6 +26,7 @@ export const MeCtx = createContext<{ me: Me; update: () => void }>({
 })
 
 export const MeProvider = ({ children }: { children: ReactNode }) => {
+  const router = useRouter()
   const [me, setMe] = useState<Me>({
     username: "",
     name: "",
@@ -37,7 +39,8 @@ export const MeProvider = ({ children }: { children: ReactNode }) => {
   const update = () => {
     fetchMe()
       .then((d) => {
-        if (!d.error) setMe(d.data)
+        if (!d.error) return setMe(d.data)
+        router.push("/")
       })
       .catch(console.log)
   }
