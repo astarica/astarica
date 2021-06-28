@@ -34,6 +34,7 @@ model Comment {
   createdAt   DateTime
   Web         Web?     @relation(fields: [webUsername], references: [username])
   webUsername String?
+  public      Boolean  @default(false)
 }
 
 enum Status {
