@@ -11,7 +11,10 @@ export class Web {
   async details() {
     const me = await db.web.findUnique({
       where: { username: this.username },
-      include: { invitations: true, comments: true },
+      include: {
+        invitations: { orderBy: { lastUpdate: "desc" } },
+        comments: { orderBy: { createdAt: "desc" } },
+      },
     })
     if (me != null) {
       const { password: _, ...detail } = me

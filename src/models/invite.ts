@@ -14,7 +14,7 @@ export class Invite {
     if (status)
       return await db.invitation.update({
         where: { id: this.id },
-        data: { status },
+        data: { status, lastUpdate: new Date() },
       })
     return null
   }
