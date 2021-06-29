@@ -58,12 +58,16 @@ export class Web {
   }
 }
 
-export const DEFAULT_MSG_TEMPLATE = `
+export const DEFAULT_MSG_TEMPLATE = `_Assalamualaikum_
 Hello [name] at [address],
-I'm here to invite you on my marriage party.
+I'm here to invite you on my *marriage party*.
 show my invitation link here:
+
+on *June 12, 2025*
 
 [link]
 
+
 Thanks
+~yeyeye~
 `
