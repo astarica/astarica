@@ -80,5 +80,5 @@ Salam,
 Kel. Bp Slamet dan Ibu Juwarti
 Kel. Bp Jumadi dan Ibu Ratna
 
-Wassalamualaikum Warohmatullohi Wabarokatuh.
+_Wassalamualaikum Warohmatullohi Wabarokatuh_.
 `
