@@ -58,16 +58,27 @@ export class Web {
   }
 }
 
-export const DEFAULT_MSG_TEMPLATE = `_Assalamualaikum_
-Hello [name] at [address],
-I'm here to invite you on my *marriage party*.
-show my invitation link here:
+export const DEFAULT_MSG_TEMPLATE = `Kepada *[name]* di [address]
 
-on *June 12, 2025*
+_Assalamualaikum Warohmatullohi Wabarokatuh_
 
-[link]
+Pada kesempatan yang berbahagia ini, tanpa mengurangi rasa hormat, kami ingin mengundang sdr [name] untuk hadir dalam acara pernikahan kami yang akan diselenggarakan pada :
 
+Hari/Tgl.   :
+Waktu       :
+Lokasi      :
 
-Thanks
-~yeyeye~
+*Berikut link undangan kami lampirkan, mohon untuk konfimasi kehadiran pada link berikut.*
+
+[Link]
+
+Merupakan kehormatan dan kebahagiaan bagi kami apabila anda berkenan untuk hadir dan memberikan doa restu kepada kami 🙏🏻
+
+Salam,
+*Wafa & Dwi*
+
+Kel. Bp Slamet dan Ibu Juwarti
+Kel. Bp Jumadi dan Ibu Ratna
+
+Wassalamualaikum Warohmatullohi Wabarokatuh.
 `
