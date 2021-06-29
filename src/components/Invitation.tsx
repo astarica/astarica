@@ -1,17 +1,19 @@
 import { AddIcon, CopyIcon, DeleteIcon, SearchIcon } from "@chakra-ui/icons"
 import { Box, Flex, HStack, Heading, VStack } from "@chakra-ui/layout"
+import { Invitation as IInvitation, Status } from "@prisma/client"
 import { Input, InputGroup, InputLeftElement } from "@chakra-ui/input"
+import { useContext, useState } from "react"
 
 import { Button } from "@chakra-ui/button"
-import { Invitation as IInvitation } from "@prisma/client"
 import { MeCtx } from "./MeCtx"
 import { Select } from "@chakra-ui/select"
 import { StackProps } from "@chakra-ui/react"
 import { statusMapping } from "../services/status"
-import { useContext } from "react"
 
 export const Invitation = () => {
   const { me } = useContext(MeCtx)
+  const [showStat, setShowStat] = useState("")
+
   return (
     <VStack w="full" p={4}>
       <Flex justifyContent="space-between" w="full">
@@ -31,8 +33,23 @@ export const Invitation = () => {
         justify="space-between"
       >
         <Box>
-          <Select size="xs" variant="flushed">
-            <option>Semua</option>
+          <Select
+            size="xs"
+            variant="flushed"
+            textTransform="uppercase"
+            onChange={({ target }) => setShowStat(target.value)}
+          >
+            <option key="all" value="">
+              semua
+            </option>
+            {Object.keys(Status).map((s) => {
+              const value = s as Status
+              return (
+                <option key={s} value={value}>
+                  {statusMapping(value).name}
+                </option>
+              )
+            })}
           </Select>
         </Box>
         <Box>
@@ -43,12 +60,14 @@ export const Invitation = () => {
         </Box>
       </Flex>
       <VStack w="full">
-        {me.invitations.map((invitation) => (
-          <InvitationItem
-            key={invitation.id.toString() + invitation.lastUpdate}
-            data={invitation}
-          />
-        ))}
+        {me.invitations
+          .filter((i) => (showStat ? i.status === showStat : true))
+          .map((invitation) => (
+            <InvitationItem
+              key={invitation.id.toString() + invitation.lastUpdate}
+              data={invitation}
+            />
+          ))}
       </VStack>
     </VStack>
   )
