@@ -8,7 +8,6 @@ export const Template = () => {
   const { me } = useContext(MeCtx)
 
   const templateFormatter = (t: string) => {
-    console.log(t)
     return t
       .replace(/\n/g, "<br/>")
       .replace(/(\*)([^\*]*)(\*)/g, "<strong>$2</strong>")
@@ -21,8 +20,15 @@ export const Template = () => {
       <Heading w="full" size="sm">
         Setting Template Undangan
       </Heading>
-      <Box borderLeftWidth={6} borderColor="teal" p={4} bgColor="white">
+      <Box
+        borderLeftWidth={6}
+        borderColor="teal"
+        w="full"
+        p={4}
+        bgColor="white"
+      >
         <Box
+          w="full"
           mb={3}
           dangerouslySetInnerHTML={{
             __html: templateFormatter(me.template) || "",

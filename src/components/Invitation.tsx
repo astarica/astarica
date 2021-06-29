@@ -6,6 +6,7 @@ import { Button } from "@chakra-ui/button"
 import { Invitation as IInvitation } from "@prisma/client"
 import { MeCtx } from "./MeCtx"
 import { Select } from "@chakra-ui/select"
+import { StackProps } from "@chakra-ui/react"
 import { statusMapping } from "../services/status"
 import { useContext } from "react"
 
@@ -53,9 +54,11 @@ export const Invitation = () => {
   )
 }
 
-const InvitationItem = ({ key, data }: { key?: string; data: IInvitation }) => (
+const InvitationItem = ({
+  data,
+  ...props
+}: StackProps & { data: IInvitation }) => (
   <HStack
-    key={key}
     w="full"
     p={2}
     bgColor="white"
@@ -63,6 +66,7 @@ const InvitationItem = ({ key, data }: { key?: string; data: IInvitation }) => (
     borderLeftWidth={5}
     borderColor="teal"
     justify="space-between"
+    {...props}
   >
     <VStack alignItems="flex-start" spacing={1}>
       <Heading size="sm" color="teal">

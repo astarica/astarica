@@ -2,11 +2,12 @@ import { Box, Flex, HStack, Heading, VStack } from "@chakra-ui/layout"
 
 import { Comment as IComment } from "@prisma/client"
 import { MeCtx } from "./MeCtx"
+import { StackProps } from "@chakra-ui/react"
 import moment from "moment"
 import { useContext } from "react"
 
-const Item = ({ data }: { data: IComment }) => (
-  <HStack p={4} bgColor="white" w="full" alignItems="flex-start">
+const Item = ({ data, ...props }: StackProps & { data: IComment }) => (
+  <HStack p={4} bgColor="white" w="full" alignItems="flex-start" {...props}>
     <Box>
       <Flex
         alignItems="center"
@@ -47,7 +48,7 @@ export const Comment = () => {
       </Heading>
       <VStack w="full" alignItems="stretch" justifyContent="stretch">
         {me.comments.map((c) => (
-          <Item data={c} />
+          <Item key={`comment-${c.id}`} data={c} />
         ))}
       </VStack>
     </VStack>
