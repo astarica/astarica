@@ -1,4 +1,4 @@
-import { AddIcon, CopyIcon, DeleteIcon, SearchIcon } from "@chakra-ui/icons"
+import { AddIcon, CopyIcon, SearchIcon } from "@chakra-ui/icons"
 import { Box, Flex, HStack, Heading, VStack } from "@chakra-ui/layout"
 import { Invitation as IInvitation, Status } from "@prisma/client"
 import { Input, InputGroup, InputLeftElement } from "@chakra-ui/input"
@@ -104,7 +104,6 @@ const InvitationItem = ({
       </Box>
       <HStack color="blackAlpha.700">
         <CopyIcon />
-        <DeleteIcon />
       </HStack>
     </VStack>
   </HStack>
