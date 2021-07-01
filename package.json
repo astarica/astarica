@@ -19,6 +19,7 @@
     "@prisma/client": "^2.24.1",
     "cookies": "^0.8.0",
     "framer-motion": "^3.5.2",
+    "fuse.js": "^6.4.6",
     "jsonwebtoken": "^8.5.1",
     "moment": "^2.29.1",
     "next": "latest",

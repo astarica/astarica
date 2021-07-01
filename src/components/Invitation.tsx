@@ -6,13 +6,22 @@ import { StackProps, useToast } from "@chakra-ui/react"
 import { useContext, useState } from "react"
 
 import { Button } from "@chakra-ui/button"
+import Fuse from "fuse.js"
 import { MeCtx } from "./MeCtx"
 import { Select } from "@chakra-ui/select"
 import { statusMapping } from "../services/status"
 
 export const Invitation = () => {
   const { me } = useContext(MeCtx)
+  const [q, setQ] = useState("")
   const [showStat, setShowStat] = useState("")
+
+  const fuse = new Fuse(me.invitations, { keys: ["name", "address"] })
+
+  const grep = fuse.search(q).map((t) => t.item as IInvitation)
+  const items = grep.length
+    ? grep.filter((i) => (showStat ? i.status === showStat : true))
+    : me.invitations.filter((i) => (showStat ? i.status === showStat : true))
 
   return (
     <VStack w="full" p={4}>
@@ -55,19 +64,22 @@ export const Invitation = () => {
         <Box>
           <InputGroup size="xs">
             <InputLeftElement pointerEvents="none" children={<SearchIcon />} />
-            <Input variant="filled" placeholder="Ketik nama..." />
+            <Input
+              variant="filled"
+              placeholder="Ketik nama..."
+              value={q}
+              onChange={({ target }) => setQ(target.value)}
+            />
           </InputGroup>
         </Box>
       </Flex>
       <VStack w="full">
-        {me.invitations
-          .filter((i) => (showStat ? i.status === showStat : true))
-          .map((invitation) => (
-            <InvitationItem
-              key={invitation.id.toString() + invitation.lastUpdate}
-              data={invitation}
-            />
-          ))}
+        {items.map((invitation) => (
+          <InvitationItem
+            key={invitation.id.toString() + invitation.lastUpdate}
+            data={invitation}
+          />
+        ))}
       </VStack>
     </VStack>
   )
