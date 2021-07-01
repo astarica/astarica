@@ -76,35 +76,38 @@ export const Invitation = () => {
 const InvitationItem = ({
   data,
   ...props
-}: StackProps & { data: IInvitation }) => (
-  <HStack
-    w="full"
-    p={2}
-    bgColor="white"
-    borderRadius="sm"
-    borderLeftWidth={5}
-    borderColor="teal"
-    justify="space-between"
-    {...props}
-  >
-    <VStack alignItems="flex-start" spacing={1}>
-      <Heading size="sm" color="teal">
-        {data.name}
-      </Heading>
-      <Box fontSize="sm">{data.address}</Box>
-    </VStack>
-    <VStack>
-      <Box
-        textTransform="uppercase"
-        color="red.500"
-        fontSize="sm"
-        fontWeight="bold"
-      >
-        {statusMapping(data.status).name}
-      </Box>
-      <HStack color="blackAlpha.700">
-        <CopyIcon />
-      </HStack>
-    </VStack>
-  </HStack>
-)
+}: StackProps & { data: IInvitation }) => {
+  const { name, color } = statusMapping(data.status)
+  return (
+    <HStack
+      w="full"
+      p={2}
+      bgColor="white"
+      borderRadius="sm"
+      borderLeftWidth={5}
+      borderColor="teal"
+      justify="space-between"
+      {...props}
+    >
+      <VStack alignItems="flex-start" spacing={1}>
+        <Heading size="sm" color="teal">
+          {data.name}
+        </Heading>
+        <Box fontSize="sm">{data.address}</Box>
+      </VStack>
+      <VStack align="flex-end">
+        <Box
+          textTransform="uppercase"
+          color={color}
+          fontSize="sm"
+          fontWeight="bold"
+        >
+          {name}
+        </Box>
+        <Button size="sm" aria-label="copy-invitation" rightIcon={<CopyIcon />}>
+          Copy
+        </Button>
+      </VStack>
+    </HStack>
+  )
+}

@@ -3,14 +3,14 @@ import { Status } from "@prisma/client"
 export const statusMapping = (stat: Status) => {
   switch (stat) {
     default:
-      return { name: "Undefined" }
+      return { name: "Undefined", color: "black" }
     case Status.ABSENT:
-      return { name: "Tidak Hadir" }
+      return { name: "Tidak Hadir", color: "red.600" }
     case Status.CONFIRMED:
-      return { name: "Hadir" }
+      return { name: "Hadir", color: "teal.600" }
     case Status.CONFUSED:
-      return { name: "BINGUNG" }
+      return { name: "BINGUNG", color: "gray.600" }
     case Status.NO_CONFIRMATION:
-      return { name: "Belum Konfimasi" }
+      return { name: "Belum Konfimasi", color: "orange.600" }
   }
 }
