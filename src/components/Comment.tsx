@@ -42,7 +42,7 @@ const Item = ({ data, ...props }: StackProps & { data: IComment }) => (
 export const Comment = () => {
   const { me } = useContext(MeCtx)
   return (
-    <VStack p={4} w="full" alignItems="flex-start">
+    <VStack w="full" alignItems="flex-start">
       <Heading w="full" size="small" textAlign="left">
         Ucapan Terbaru
       </Heading>

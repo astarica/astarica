@@ -25,7 +25,7 @@ export const Invitation = () => {
     : me.invitations.filter((i) => (showStat ? i.status === showStat : true))
 
   return (
-    <VStack w="full" p={4}>
+    <VStack w="full">
       <Flex justifyContent="space-between" w="full">
         <Heading w="full" size="sm">
           Data Undangan

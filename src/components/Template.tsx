@@ -39,7 +39,7 @@ export const Template = () => {
   }
 
   return (
-    <VStack p={4} alignItems="flex-start" w="full">
+    <VStack alignItems="flex-start" w="full">
       <Heading w="full" size="sm">
         Setting Template Undangan
       </Heading>
