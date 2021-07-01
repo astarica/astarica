@@ -2,12 +2,12 @@ import { AddIcon, CopyIcon, SearchIcon } from "@chakra-ui/icons"
 import { Box, Flex, HStack, Heading, VStack } from "@chakra-ui/layout"
 import { Invitation as IInvitation, Status } from "@prisma/client"
 import { Input, InputGroup, InputLeftElement } from "@chakra-ui/input"
+import { StackProps, useToast } from "@chakra-ui/react"
 import { useContext, useState } from "react"
 
 import { Button } from "@chakra-ui/button"
 import { MeCtx } from "./MeCtx"
 import { Select } from "@chakra-ui/select"
-import { StackProps } from "@chakra-ui/react"
 import { statusMapping } from "../services/status"
 
 export const Invitation = () => {
@@ -77,7 +77,27 @@ const InvitationItem = ({
   data,
   ...props
 }: StackProps & { data: IInvitation }) => {
+  const toast = useToast()
   const { name, color } = statusMapping(data.status)
+  const { me } = useContext(MeCtx)
+  const copy = () => {
+    const fullText = me.template
+      .replace(/\[\s*name\s*\]/g, data.name)
+      .replace(/\[\s*address\s*\]/g, data.address)
+      .replace(/\[\s*link\s*\]/g, me.link + "?inv=" + data.id)
+    const isCopy = copyToClipboard(fullText)
+    if (isCopy) toast({ title: "Undangan telah disalin", status: "success" })
+  }
+  function copyToClipboard(text: string) {
+    if (!document) return false
+    var dummy = document.createElement("textarea")
+    document.body.appendChild(dummy)
+    dummy.value = text
+    dummy.select()
+    document.execCommand("copy")
+    document.body.removeChild(dummy)
+    return true
+  }
   return (
     <HStack
       w="full"
@@ -104,7 +124,12 @@ const InvitationItem = ({
         >
           {name}
         </Box>
-        <Button size="sm" aria-label="copy-invitation" rightIcon={<CopyIcon />}>
+        <Button
+          size="sm"
+          aria-label="copy-invitation"
+          rightIcon={<CopyIcon />}
+          onClick={copy}
+        >
           Copy
         </Button>
       </VStack>
