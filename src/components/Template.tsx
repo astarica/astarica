@@ -1,5 +1,5 @@
 import { Box, Heading, VStack } from "@chakra-ui/layout"
-import { Textarea, useToast } from "@chakra-ui/react"
+import { Flex, Textarea, useToast } from "@chakra-ui/react"
 import { useContext, useEffect, useState } from "react"
 
 import { Button } from "@chakra-ui/button"
@@ -40,9 +40,23 @@ export const Template = () => {
 
   return (
     <VStack alignItems="flex-start" w="full">
-      <Heading w="full" size="sm">
-        Setting Template Undangan
-      </Heading>
+      <Flex justifyContent="space-between" w="full">
+        <Heading w="full" size="sm">
+          Setting Template Undangan
+        </Heading>
+
+        <Button
+          size="xs"
+          px={4}
+          colorScheme="teal"
+          onClick={() => {
+            if (isEdit) updateTemplate()
+            setIsEdit((v) => !v)
+          }}
+        >
+          {isEdit ? "Submit" : "Edit"}
+        </Button>
+      </Flex>
       <Box
         borderLeftWidth={6}
         borderColor="teal"
@@ -65,17 +79,6 @@ export const Template = () => {
             }}
           ></Box>
         )}
-        <Button
-          size="xs"
-          px={4}
-          colorScheme="teal"
-          onClick={() => {
-            if (isEdit) updateTemplate()
-            setIsEdit((v) => !v)
-          }}
-        >
-          {isEdit ? "Submit" : "Edit"}
-        </Button>
       </Box>
     </VStack>
   )
