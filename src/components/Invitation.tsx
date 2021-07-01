@@ -9,6 +9,7 @@ import { Button } from "@chakra-ui/button"
 import Fuse from "fuse.js"
 import { MeCtx } from "./MeCtx"
 import { Select } from "@chakra-ui/select"
+import { UploadModal } from "./UploadModal"
 import { statusMapping } from "../services/status"
 
 export const Invitation = () => {
@@ -29,9 +30,14 @@ export const Invitation = () => {
         <Heading w="full" size="sm">
           Data Undangan
         </Heading>
-        <Button size="xs" px={4} colorScheme="blue" rightIcon={<AddIcon />}>
+        <UploadModal
+          size="xs"
+          px={4}
+          colorScheme="blue"
+          rightIcon={<AddIcon />}
+        >
           Add
-        </Button>
+        </UploadModal>
       </Flex>
       <Flex
         w="full"
