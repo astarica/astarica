@@ -139,6 +139,7 @@ const InvitationItem = ({
           color={color}
           fontSize="sm"
           fontWeight="bold"
+          textAlign="right"
         >
           {name}
         </Box>
