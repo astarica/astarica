@@ -21,7 +21,7 @@ const Dashboard = () => {
         <Navbar />
         <Hero />
         <Stat />
-        <Tabs variant="solid-rounded" w="full" colorScheme="teal">
+        <Tabs w="full" colorScheme="teal">
           <TabMenu />
           <TabPanels bg="gray.200">
             <TabPanel>
@@ -43,10 +43,16 @@ const Dashboard = () => {
 const TabMenu = () => {
   const { me } = useContext(MeCtx)
   return (
-    <TabList p={4}>
-      <Tab>Setting Template</Tab>
-      <Tab>Undangan ({me.invitations.length})</Tab>
-      <Tab>Ucapan ({me.comments.length})</Tab>
+    <TabList>
+      <Tab _focus={{ fontWeight: "bold", bgColor: "gray.200" }} fontSize="sm">
+        Setting Template
+      </Tab>
+      <Tab _focus={{ fontWeight: "bold", bgColor: "gray.200" }} fontSize="sm">
+        Undangan ({me.invitations.length})
+      </Tab>
+      <Tab _focus={{ fontWeight: "bold", bgColor: "gray.200" }} fontSize="sm">
+        Ucapan ({me.comments.length})
+      </Tab>
     </TabList>
   )
 }
