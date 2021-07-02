@@ -26,7 +26,8 @@
     "node-fetch": "^2.6.1",
     "prisma": "^2.24.1",
     "react": "^17.0.1",
-    "react-dom": "^17.0.1"
+    "react-dom": "^17.0.1",
+    "xlsx": "^0.17.0"
   },
   "devDependencies": {
     "@types/cookies": "^0.7.6",

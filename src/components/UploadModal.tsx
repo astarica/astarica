@@ -15,15 +15,18 @@ import {
   useDisclosure,
   useToast,
 } from "@chakra-ui/react"
-import { useContext, useState } from "react"
+import { useContext, useRef, useState } from "react"
 
 import { AddIcon } from "@chakra-ui/icons"
 import { MeCtx } from "./MeCtx"
+import XLSX from "xlsx"
 import { fetcher } from "../services/fetcher"
 
 export const UploadModal = (props: ButtonProps) => {
+  const fileInput = useRef<HTMLInputElement>(null)
   const { isOpen, onOpen, onClose } = useDisclosure()
   const [inv, setInv] = useState({ name: "", address: "" })
+  const [invs, setInvs] = useState<{ name: string; address: string }[]>([])
   const { update } = useContext(MeCtx)
   const toast = useToast()
 
@@ -42,9 +45,30 @@ export const UploadModal = (props: ButtonProps) => {
       .catch(console.log)
       .finally(() => {
         setInv({ name: "", address: "" })
+        setInvs([])
+        if (fileInput.current) fileInput.current.value = ""
         update()
+        onClose()
       })
   }
+
+  const fileHandle = (f: File) =>
+    new Promise<{ name: string; address: string }[]>((res, rej) => {
+      var reader = new FileReader()
+      reader.onload = function (e) {
+        if (!e.target) return rej("no file")
+        const data = e.target.result
+        const workbook = XLSX.read(data, { type: "binary" })
+        const invitations = XLSX.utils.sheet_to_json<object>(
+          workbook.Sheets[workbook.SheetNames[0]]
+        )
+        const result = invitations
+          .filter((x) => "name" in x && "address" in x)
+          .map((x) => x as { name: string; address: string })
+        res(result)
+      }
+      reader.readAsBinaryString(f)
+    })
 
   return (
     <>
@@ -101,13 +125,26 @@ export const UploadModal = (props: ButtonProps) => {
               <VStack w="full">
                 <Box fontWeight="bold">Masukkan lebih banyak data (*.xlsx)</Box>
                 <Input
+                  ref={fileInput}
                   type="file"
                   variant="flushed"
                   placeholder="alamat"
                   accept=".xlsx"
+                  onChange={async ({ target }) => {
+                    const f = target.files ? target.files[0] : null
+                    if (!f) return null
+                    const data = await fileHandle(f)
+                    if (data.length) setInvs(data)
+                  }}
                 ></Input>
-                <Button size="sm" leftIcon={<AddIcon />} colorScheme="teal">
-                  Tambah Penerima (0)
+                <Button
+                  size="sm"
+                  disabled={!invs.length}
+                  leftIcon={<AddIcon />}
+                  colorScheme="teal"
+                  onClick={() => upload(invs)}
+                >
+                  Tambah Penerima ({invs.length})
                 </Button>
               </VStack>
             </Stack>
