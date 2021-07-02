@@ -1,11 +1,10 @@
-import { Flex, Heading } from '@chakra-ui/react'
+import { Box, Heading } from "@chakra-ui/layout"
 
-export const Hero = ({ title }: { title: string }) => (
-  <Flex justifyContent="center" alignItems="center" height="100vh">
-    <Heading fontSize="6vw">{title}</Heading>
-  </Flex>
+import { Container } from "./Container"
+
+export const Hero = () => (
+  <Container alignItems="flex-start" p={4} w="full">
+    <Heading>Hallo Wafa,</Heading>
+    <Box>Selamat datang di dashboard undanganmu</Box>
+  </Container>
 )
-
-Hero.defaultProps = {
-  title: 'with-chakra-ui-typescript',
-}
