@@ -72,7 +72,7 @@ export const Invitation = () => {
             <InputLeftElement pointerEvents="none" children={<SearchIcon />} />
             <Input
               variant="filled"
-              placeholder="Ketik nama..."
+              placeholder="Ketik nama atau alamat..."
               value={q}
               onChange={({ target }) => setQ(target.value)}
             />
