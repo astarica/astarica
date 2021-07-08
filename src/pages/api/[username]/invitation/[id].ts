@@ -1,11 +1,13 @@
 import { ErrorNotFound, ErrorSchema } from "../../../../models/errors"
 import { NextApiRequest, NextApiResponse } from "next"
 
+import { CorsMiddleware } from "../../../../models/cors"
 import { Invite } from "../../../../models/invite"
 import { Status } from "@prisma/client"
 import { Web } from "../../../../models/web"
 
 export default async (req: NextApiRequest, res: NextApiResponse) => {
+  await CorsMiddleware(req, res)
   const username = req.query.username as string
   const id = Number(req.query.id as string)
 

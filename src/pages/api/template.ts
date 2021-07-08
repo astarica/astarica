@@ -2,9 +2,11 @@ import { ErrorAuth, ErrorSchema } from "../../models/errors"
 import { NextApiRequest, NextApiResponse } from "next"
 
 import { Auth } from "../../models/auth"
+import { CorsMiddleware } from "../../models/cors"
 import { Web } from "../../models/web"
 
 export default async (req: NextApiRequest, res: NextApiResponse) => {
+  await CorsMiddleware(req, res)
   try {
     const auth = new Auth(req, res)
     const login = auth.isLogin()
