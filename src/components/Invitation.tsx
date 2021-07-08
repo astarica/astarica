@@ -102,7 +102,7 @@ const InvitationItem = ({
     const fullText = me.template
       .replace(/\[\s*name\s*\]/g, data.name)
       .replace(/\[\s*address\s*\]/g, data.address)
-      .replace(/\[\s*link\s*\]/g, me.link + "?inv=" + data.id)
+      .replace(/\[\s*link\s*\]/g, me.link + "?id=" + data.id)
     const isCopy = copyToClipboard(fullText)
     if (isCopy) toast({ title: "Undangan telah disalin", status: "success" })
   }
