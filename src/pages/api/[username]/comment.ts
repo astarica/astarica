@@ -1,9 +1,11 @@
 import { NextApiRequest, NextApiResponse } from "next"
 
+import { CorsMiddleware } from "../../../models/cors"
 import { ErrorNotFound } from "../../../models/errors"
 import { Web } from "../../../models/web"
 
 export default async (req: NextApiRequest, res: NextApiResponse) => {
+  await CorsMiddleware(req, res)
   const username = req.query.username as string
   const me = new Web(username)
   const details = await me.details()
