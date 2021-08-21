@@ -1,16 +1,16 @@
-import { AddIcon, CopyIcon, SearchIcon } from "@chakra-ui/icons"
-import { Box, Flex, HStack, Heading, VStack } from "@chakra-ui/layout"
-import { Invitation as IInvitation, Status } from "@prisma/client"
+import { Button } from "@chakra-ui/button"
+import { AddIcon, CopyIcon, ExternalLinkIcon, SearchIcon } from "@chakra-ui/icons"
 import { Input, InputGroup, InputLeftElement } from "@chakra-ui/input"
+import { Box, Flex, Heading, HStack, VStack } from "@chakra-ui/layout"
 import { StackProps, useToast } from "@chakra-ui/react"
+import { Select } from "@chakra-ui/select"
+import { Invitation as IInvitation, Status } from "@prisma/client"
+import Fuse from "fuse.js"
 import { useContext, useState } from "react"
 
-import { Button } from "@chakra-ui/button"
-import Fuse from "fuse.js"
-import { MeCtx } from "./MeCtx"
-import { Select } from "@chakra-ui/select"
-import { UploadModal } from "./UploadModal"
 import { statusMapping } from "../services/status"
+import { MeCtx } from "./MeCtx"
+import { UploadModal } from "./UploadModal"
 
 export const Invitation = () => {
   const { me } = useContext(MeCtx)
@@ -98,11 +98,15 @@ const InvitationItem = ({
   const toast = useToast()
   const { name, color } = statusMapping(data.status)
   const { me } = useContext(MeCtx)
-  const copy = () => {
+  const generateFullText = () => {
     const fullText = me.template
       .replace(/\[\s*name\s*\]/g, data.name)
       .replace(/\[\s*address\s*\]/g, data.address)
       .replace(/\[\s*link\s*\]/g, me.link + "?id=" + data.id)
+    return fullText
+  }
+  const copy = () => {
+    const fullText = generateFullText()
     const isCopy = copyToClipboard(fullText)
     if (isCopy) toast({ title: "Undangan telah disalin", status: "success" })
   }
@@ -143,14 +147,28 @@ const InvitationItem = ({
         >
           {name}
         </Box>
-        <Button
-          size="sm"
-          aria-label="copy-invitation"
-          rightIcon={<CopyIcon />}
-          onClick={copy}
-        >
-          Copy
-        </Button>
+        <HStack>
+          <Button
+            size="sm"
+            aria-label="copy-invitation"
+            as="a"
+            href={`https://api.whatsapp.com/send?text=${encodeURIComponent(
+              generateFullText()
+            )}`}
+            target="_blank"
+            rightIcon={<ExternalLinkIcon />}
+          >
+            Whatsapp
+          </Button>
+          <Button
+            size="sm"
+            aria-label="copy-invitation"
+            rightIcon={<CopyIcon />}
+            onClick={copy}
+          >
+            Copy
+          </Button>
+        </HStack>
       </VStack>
     </HStack>
   )
